@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instachords - Chord Progression Generator</title>
+    <meta name="description" content="Get instant inspiration for your next musical creation">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <!-- Add Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script type="module" src="script.js" defer></script>
+</head>
+<body>
+    <div class="gradient-bg">
+        <main class="container">
+            <!-- Header -->
+            <header class="header">
+                <div class="logo-container">
+                    <!-- <i class="logo-svg" data-lucide="music"></i> -->
+                    <h1 class="app-title">
+                        Instachords
+                    </h1>
+                </div>
+                <p class="app-description">
+                    Get instant inspiration for your next musical creation. Generate chord progressions 
+                    that work beautifully together and spark your creativity.
+                </p>
+            </header>
+
+            <!-- Instrument Selector -->
+            <div class="instrument-selector-container">
+                <div id="instrument-selector" class="instrument-selector">
+                    <button id="piano-btn" class="instrument-btn active-instrument">
+                        <i data-lucide="piano"></i>
+                        Piano
+                    </button>
+                    
+                    <button id="guitar-btn" class="instrument-btn">
+                        <i data-lucide="guitar"></i>
+                        Guitar
+                    </button>
+
+                    <button id="ukulele-btn" class="instrument-btn">
+                        <i data-lucide="music"></i>
+                        Ukulele
+                    </button>
+                </div>
+            </div>
+
+            <!-- Current Progression -->
+            <div id="current-progression" class="current-progression" style="display: none;">
+                <h2 class="section-title">
+                    Your Chord Progression
+                </h2>
+                <div id="chord-grid" class="chord-grid"></div>
+            </div>
+
+            <!-- Generate Button -->
+            <div class="btn-container">
+                <button id="generate-btn" class="generate-btn">
+                    Generate New Progression
+                </button>
+            </div>
+
+            <!-- History -->
+            <section id="chord-history" class="history-section" style="display: none;">
+                <h3 class="section-title">
+                    Previous Progressions
+                </h3>
+                <div id="history-container" class="history-container"></div>
+            </section>
+
+            <!-- Footer -->
+            <footer class="footer">
+                <small class="footer-text">
+                    Made for musicians, by musicians. Keep creating! 🎵
+                </small>
+            </footer>
+        </main>
+    </div>
+
+    
+    <!-- Initialize Lucide icons -->
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>

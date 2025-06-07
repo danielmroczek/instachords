@@ -124,7 +124,7 @@ function addVariation(progression) {
     return progression;
 }
 
-function generateChordVariation() {
+export function generateChordProgression() {
     const rawProgression = getRandomElement(progressions);
     const progression = parseProgression(rawProgression);
     const filledProgression = fillProgression(progression);
@@ -132,4 +132,4 @@ function generateChordVariation() {
     return variation;
 }
 
-console.log(generateChordVariation());
+// console.log(generateChordProgression());
