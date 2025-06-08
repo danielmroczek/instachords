@@ -109,16 +109,6 @@
   color: white;
 }
 
-#guitar-btn.active-instrument {
-  background-color: #06b6d4;
-  color: white;
-}
-
-#ukulele-btn.active-instrument {
-  background-color: #f97316;
-  color: white;
-}
-
 /* New styles to replace inline styles */
 .header {
   text-align: center;

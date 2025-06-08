@@ -4,18 +4,15 @@ let progressionHistory = [];
 let selectedInstrument = 'piano';
 let isGenerating = false;
 
-// Import the chord generation function from generator.js
-import { generateChordProgression } from './generator.js';
+// Import the chord generation function and instrument list from generator.js
+import { generateChordProgression, INSTRUMENT } from './generator.js';
 
-// Generate chord progression using the imported function
+// Generate chord progression using the imported function from generator.js
 function generateInstrumentChordProgression(instrument) {
     // Generate a progression using the algorithm from generator.js
-    const progression = generateChordProgression();
-    
-    // We'll keep the instrument distinction but use the advanced algorithm
-    // for all instruments. The original instrument selection is still preserved
-    // in the UI and history.
-    return progression;
+    const progressionObjs = generateChordProgression(instrument);
+    // Map to array of chord strings for display
+    return progressionObjs;
 }
 
 // Render chord progression
@@ -30,7 +27,7 @@ function renderChordProgression(chords) {
         
         const chordText = document.createElement('div');
         chordText.className = 'chord-text';
-        chordText.textContent = chord;
+        chordText.textContent = chord.chord;
         
         chordCard.appendChild(chordText);
         chordGrid.appendChild(chordCard);
@@ -62,7 +59,7 @@ function renderHistory() {
         progression.chords.forEach(chord => {
             const chordTag = document.createElement('span');
             chordTag.className = 'chord-tag';
-            chordTag.textContent = chord;
+            chordTag.textContent = chord.chord;
             chordsContainer.appendChild(chordTag);
         });
         
@@ -92,25 +89,46 @@ function renderHistory() {
     lucide.createIcons();
 }
 
+// Dynamically create instrument buttons
+function renderInstrumentSelector() {
+    const selector = document.getElementById('instrument-selector');
+    selector.innerHTML = '';
+    Object.entries(INSTRUMENT).forEach(([key, value]) => {
+        const btn = document.createElement('button');
+        btn.id = `${key}-btn`;
+        btn.className = 'instrument-btn' + (selectedInstrument === key ? ' active-instrument' : '');
+        btn.innerHTML = `<i data-lucide="${value.icon}"></i>${key.charAt(0).toUpperCase() + key.slice(1)}`;
+        if (selectedInstrument === key) {
+            btn.style.backgroundColor = value.color;
+            btn.style.color = '#fff';
+        }
+        btn.addEventListener('click', function() {
+            selectedInstrument = key;
+            updateInstrumentSelector();
+            if (currentProgression.length > 0) {
+                generateNewProgression();
+            }
+        });
+        selector.appendChild(btn);
+    });
+    lucide.createIcons();
+}
+
 // Update instrument selector styles
 function updateInstrumentSelector() {
-    const pianoBtn = document.getElementById('piano-btn');
-    const guitarBtn = document.getElementById('guitar-btn');
-    const ukuleleBtn = document.getElementById('ukulele-btn');
-    
-    // Remove active class from all
-    pianoBtn.classList.remove('active-instrument');
-    guitarBtn.classList.remove('active-instrument');
-    ukuleleBtn.classList.remove('active-instrument');
-    
-    // Add active class to selected
-    if (selectedInstrument === 'piano') {
-        pianoBtn.classList.add('active-instrument');
-    } else if (selectedInstrument === 'guitar') {
-        guitarBtn.classList.add('active-instrument');
-    } else if (selectedInstrument === 'ukulele') {
-        ukuleleBtn.classList.add('active-instrument');
-    }
+    Object.entries(INSTRUMENT).forEach(([key, value]) => {
+        const btn = document.getElementById(`${key}-btn`);
+        if (!btn) return;
+        if (selectedInstrument === key) {
+            btn.classList.add('active-instrument');
+            btn.style.backgroundColor = value.color;
+            btn.style.color = '#fff';
+        } else {
+            btn.classList.remove('active-instrument');
+            btn.style.backgroundColor = 'rgba(6, 182, 212, 0.2)';
+            btn.style.color = '#06b6d4';
+        }
+    });
 }
 
 // Generate new progression
@@ -122,7 +140,9 @@ function generateNewProgression() {
     
     // Add current progression to history if it exists
     if (currentProgression.length > 0) {
-        progressionHistory.unshift({ chords: currentProgression, instrument: selectedInstrument });
+        // Use the instrument for which the progression was generated
+        const instrument = currentProgression.instrument || selectedInstrument;
+        progressionHistory.unshift({ chords: currentProgression, instrument });
         // Keep only last 5 progressions
         progressionHistory = progressionHistory.slice(0, 5);
     }
@@ -139,6 +159,8 @@ function generateNewProgression() {
     // Simulate generation delay
     setTimeout(() => {
         const newProgression = generateInstrumentChordProgression(selectedInstrument);
+        // Attach instrument info to the progression object
+        newProgression.instrument = selectedInstrument;
         currentProgression = newProgression;
         
         renderChordProgression(currentProgression);
@@ -153,34 +175,9 @@ function generateNewProgression() {
 
 // Event listeners
 document.addEventListener('DOMContentLoaded', function() {
-    // Instrument selector buttons
-    document.getElementById('piano-btn').addEventListener('click', function() {
-        selectedInstrument = 'piano';
-        updateInstrumentSelector();
-        if (currentProgression.length > 0) {
-            generateNewProgression();
-        }
-    });
-    
-    document.getElementById('guitar-btn').addEventListener('click', function() {
-        selectedInstrument = 'guitar';
-        updateInstrumentSelector();
-        if (currentProgression.length > 0) {
-            generateNewProgression();
-        }
-    });
-    
-    document.getElementById('ukulele-btn').addEventListener('click', function() {
-        selectedInstrument = 'ukulele';
-        updateInstrumentSelector();
-        if (currentProgression.length > 0) {
-            generateNewProgression();
-        }
-    });
-    
+    renderInstrumentSelector();
     // Generate button
     document.getElementById('generate-btn').addEventListener('click', generateNewProgression);
-    
     // Generate initial progression
     generateNewProgression();
 });
