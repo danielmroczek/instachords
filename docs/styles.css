@@ -1,10 +1,42 @@
 :root {
   --pico-primary-500: #8b5cf6;
   --pico-primary-600: #7c3aed;
+  --insta-piano: #8b5cf6;
+  --insta-guitar: #06b6d4;
+  --insta-ukulele: #f97316;
+  --insta-bg-gradient: linear-gradient(135deg, #0f0f23 0%, #1a1a3e 50%, #2d1b69 100%);
+  --insta-card-gradient: linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, rgba(6, 182, 212, 0.1) 100%);
+  --insta-history-gradient: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(6, 182, 212, 0.1) 100%);
+  --insta-chord-tag-bg: rgba(139, 92, 246, 0.2);
+  --insta-chord-tag-color: #06b6d4;
+  --insta-btn-bg: rgba(6, 182, 212, 0.2);
+  --insta-btn-color: #06b6d4;
+  --insta-btn-radius: 0.75rem;
+  --insta-btn-padding: 1.5rem 2rem;
+  --insta-btn-font-size: 1rem;
+  --insta-btn-font-weight: 600;
+  --insta-btn-gap: 0.5rem;
+  --insta-section-title-color: #06b6d4;
+  --insta-footer-border: 1px solid rgba(139, 92, 246, 0.2);
+  --insta-card-radius: 0.75rem;
+  --insta-card-padding: 2rem 1.5rem;
+  --insta-chord-text-color: #06b6d4;
+  --insta-chord-text-size: clamp(1.5rem, 4vw, 2.5rem);
+  --insta-chord-tag-radius: 0.375rem;
+  --insta-chord-tag-font-size: 0.875rem;
+  --insta-chord-tag-font-weight: 500;
+  --insta-spinner-size: 1rem;
+  --insta-spinner-border: 2px solid rgba(255,255,255,0.3);
+  --insta-spinner-border-top: 2px solid white;
+  --insta-generate-btn-gradient: linear-gradient(135deg, var(--pico-primary-500), var(--insta-guitar));
+  --insta-generate-btn-radius: 0.75rem;
+  --insta-generate-btn-font-size: 1.125rem;
+  --insta-generate-btn-padding: 1rem 2rem;
+  --insta-generate-btn-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
 }
 
 .gradient-bg {
-  background: linear-gradient(135deg, #0f0f23 0%, #1a1a3e 50%, #2d1b69 100%);
+  background: var(--insta-bg-gradient);
   min-height: 100vh;
 }
 
@@ -45,24 +77,24 @@
 }
 
 .chord-card {
-  background: linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, rgba(6, 182, 212, 0.1) 100%);
-  border-radius: 0.75rem;
-  padding: 2rem 1.5rem;
+  background: var(--insta-card-gradient);
+  border-radius: var(--insta-card-radius);
+  padding: var(--insta-card-padding);
   text-align: center;
   position: relative;
   overflow: hidden;
 }
 
 .chord-text {
-  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  font-size: var(--insta-chord-text-size);
   font-weight: bold;
-  color: #06b6d4;
+  color: var(--insta-chord-text-color);
   position: relative;
   z-index: 10;
 }
 
 .history-item {
-  background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(6, 182, 212, 0.1) 100%);
+  background: var(--insta-history-gradient);
   padding: 1rem;
   border-radius: 0.5rem;
   display: flex;
@@ -71,19 +103,19 @@
 }
 
 .chord-tag {
-  background-color: rgba(139, 92, 246, 0.2);
-  color: #06b6d4;
+  background-color: var(--insta-chord-tag-bg);
+  color: var(--insta-chord-tag-color);
   padding: 0.25rem 0.75rem;
-  border-radius: 0.375rem;
-  font-size: 0.875rem;
-  font-weight: 500;
+  border-radius: var(--insta-chord-tag-radius);
+  font-size: var(--insta-chord-tag-font-size);
+  font-weight: var(--insta-chord-tag-font-weight);
 }
 
 .loading-spinner {
-  width: 1rem;
-  height: 1rem;
-  border: 2px solid rgba(255,255,255,0.3);
-  border-top: 2px solid white;
+  width: var(--insta-spinner-size);
+  height: var(--insta-spinner-size);
+  border: var(--insta-spinner-border);
+  border-top: var(--insta-spinner-border-top);
   border-radius: 50%;
   animation: spin 1s linear infinite;
 }
@@ -92,20 +124,20 @@
 .instrument-btn {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: var(--insta-btn-gap);
   border: none;
-  padding: 1.5rem 2rem;
-  border-radius: 0.75rem;
-  font-size: 1rem;
-  font-weight: 600;
+  padding: var(--insta-btn-padding);
+  border-radius: var(--insta-btn-radius);
+  font-size: var(--insta-btn-font-size);
+  font-weight: var(--insta-btn-font-weight);
   cursor: pointer;
   transition: all 0.3s ease;
-  background-color: rgba(6, 182, 212, 0.2);
-  color: #06b6d4;
+  background-color: var(--insta-btn-bg);
+  color: var(--insta-btn-color);
 }
 
 .instrument-btn.active-instrument {
-  background-color: #8b5cf6;
+  background-color: var(--pico-primary-500);
   color: white;
 }
 
@@ -124,7 +156,7 @@
 }
 
 .logo-svg {
-  color: #06b6d4;
+  color: var(--insta-guitar);
   width: 48px;
   height: 48px;
 }
@@ -132,7 +164,7 @@
 .app-title {
   font-size: clamp(2rem, 5vw, 4rem);
   font-weight: bold;
-  background: linear-gradient(135deg, #06b6d4, #8b5cf6);
+  background: linear-gradient(135deg, var(--insta-guitar), var(--pico-primary-500));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -141,7 +173,6 @@
 
 .app-description {
   font-size: 1.125rem;
-  opacity: 0.8;
   max-width: 40rem;
   margin: 0 auto;
 }
@@ -165,13 +196,13 @@
 }
 
 .generate-btn {
-  background: linear-gradient(135deg, #8b5cf6, #06b6d4);
+  background: var(--insta-generate-btn-gradient);
   color: white;
   font-weight: 600;
-  padding: 1rem 2rem;
-  font-size: 1.125rem;
-  border-radius: 0.75rem;
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  padding: var(--insta-generate-btn-padding);
+  font-size: var(--insta-generate-btn-font-size);
+  border-radius: var(--insta-generate-btn-radius);
+  box-shadow: var(--insta-generate-btn-shadow);
   transition: all 0.3s ease;
   border: none;
   cursor: pointer;
@@ -189,7 +220,7 @@
 .section-title {
   font-size: 1.25rem;
   font-weight: 600;
-  color: #06b6d4;
+  color: var(--insta-section-title-color);
   margin-bottom: 1rem;
 }
 
@@ -211,7 +242,7 @@
   text-align: center;
   margin-top: 4rem;
   padding-top: 2rem;
-  border-top: 1px solid rgba(139, 92, 246, 0.2);
+  border-top: var(--insta-footer-border);
 }
 
 .footer-text {
