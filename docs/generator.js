@@ -6,9 +6,7 @@ const progressions = [
 	"I III vi IV", // Oasis
     "I V vi IV", // The Beatles, Let It Be
     "I vi iii V", // "She Love You", "Girl on Fire", "You Got It"
-    "i iiib viib vib" // Polly, In the End
-    // "I IV V I",
-    // "i iv v i",
+    "i IIIb VIIb VIb" // Polly, In the End
 ];
 
 const roman = [
@@ -190,6 +188,7 @@ function addVariation(progression) {
 export const INSTRUMENT = {
     piano: {
         icon: "piano",
+        name: "Piano / Ukulele",
         color: "#8b5cf6",
         chosenSound: {
             minor: "a",
@@ -198,18 +197,11 @@ export const INSTRUMENT = {
     },
     guitar: {
         icon: "guitar",
+        name: "Guitar",
         color: "#06b6d4",
         chosenSound: {
             minor: "e",
             major: "e",
-        }
-    },
-    ukulele: {
-        icon: "music",
-        color: "#f97316",
-        chosenSound: {
-            minor: "a",
-            major: "c",
         }
     },
 }

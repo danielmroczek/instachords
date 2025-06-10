@@ -97,7 +97,7 @@ function renderInstrumentSelector() {
         const btn = document.createElement('button');
         btn.id = `${key}-btn`;
         btn.className = 'instrument-btn' + (selectedInstrument === key ? ' active-instrument' : '');
-        btn.innerHTML = `<i data-lucide="${value.icon}"></i>${key.charAt(0).toUpperCase() + key.slice(1)}`;
+        btn.innerHTML = `<i data-lucide="${value.icon}"></i>${value.name || (key.charAt(0).toUpperCase() + key.slice(1))}`;
         if (selectedInstrument === key) {
             btn.style.backgroundColor = value.color;
             btn.style.color = '#fff';
